@@ -1,0 +1,36 @@
+import * as yup from "yup";
+
+export default function objectMapper() {
+  let flag = true;
+  let errors: string[] = [];
+
+  function validate<T = any>(
+    value: string,
+    schema: yup.StringSchema | yup.NumberSchema | yup.BooleanSchema,
+    error?: string
+  ) {
+    try {
+      const res = schema.validateSync(value);
+      return res ? (res as T) : (value as any);
+    } catch (err) {
+      flag = false;
+      if (error) errors.push(error);
+      return value as any;
+    }
+  }
+
+  const isValid = () => {
+    return flag;
+  };
+
+  const getErrors = () => {
+    return errors;
+  };
+
+  const reset = () => {
+    flag = true;
+    errors = [];
+  };
+
+  return { validate, isValid, getErrors, reset, yup };
+}
