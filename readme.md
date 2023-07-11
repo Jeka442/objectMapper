@@ -13,6 +13,18 @@ reset function reset the isValid flag and the errors array
 ## Usage
 
 ```bash
+
+interface Ires {
+  name: string;
+  age: number;
+  phone: string;
+  address: {
+    city: string;
+    street: string;
+    houseNum: number;
+  };
+}
+
     const temp = {
     name: "jeka",
     age: "5",
